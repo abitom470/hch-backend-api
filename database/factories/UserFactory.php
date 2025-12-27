@@ -24,8 +24,10 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
+            // **FINAL FIX:** Using $this->faker->name() which should now work after dump-autoload
+            'name' => $this->faker->name(), 
+            'email' => $this->faker->unique()->safeEmail(),
+            
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
